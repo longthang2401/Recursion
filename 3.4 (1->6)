@@ -1,0 +1,97 @@
+#include <iostream>
+#include <climits> // For INT_MIN
+
+using namespace std;
+
+void outputArray(int arr[], int size, int index = 0);
+void outputArrayReversed(int arr[], int size, int index = 0);
+int sumOfPositive(int arr[], int size, int index = 0);
+int countDistinct(int arr[], int size, int index = 0);
+bool onlyOddNumbers(int arr[], int size, int index = 0);
+int maxArrayValue(int arr[], int size, int index = 0, int maxVal = INT_MIN) ;
+
+
+int main() {
+    int arr[] = {1, 2, 3, 4, 5, 3, 2, 1}; // Example array
+    int size = sizeof(arr) / sizeof(arr[0]);
+
+    // 1. Output the array of integer values to screen.
+    cout << "1. Array values: ";
+    outputArray(arr, size);
+
+    // 2. Output the array of integer values to screen in reversed order.
+    cout << "2. Array values (reversed): ";
+    outputArrayReversed(arr, size);
+    cout << endl;
+
+    // 3. Find the sum of positive numbers in the array.
+    cout << "3. Sum of positive numbers: " << sumOfPositive(arr, size) << endl;
+
+    // 4. Count all distinct values in the array.
+    cout << "4. Number of distinct values: " << countDistinct(arr, size) << endl;
+
+    // 5. Check whether the array only contains odd numbers.
+    cout << "5. Array contains only odd numbers?: " << (onlyOddNumbers(arr, size) ? "Yes" : "No") << endl;
+
+    // 6. Find the maximum value in the array.
+    cout << "6. Maximum value in the array: " << maxArrayValue(arr, size) << endl;
+
+    return 0;
+}
+
+
+void outputArray(int arr[], int size, int index) {
+    if (index == size) {
+        cout << endl;
+        return;
+    }
+    cout << arr[index] << " ";
+    outputArray(arr, size, index + 1);
+}
+
+void outputArrayReversed(int arr[], int size, int index) {
+    if (index == size) {
+        return;
+    }
+    outputArrayReversed(arr, size, index + 1);
+    cout << arr[index] << " ";
+}
+
+int sumOfPositive(int arr[], int size, int index) {
+    if (index == size) {
+        return 0;
+    }
+    return ((arr[index] > 0) ? arr[index] : 0) + sumOfPositive(arr, size, index + 1);
+}
+
+int countDistinct(int arr[], int size, int index) {
+    if (index == size) {
+        return 0;
+    }
+    int count = 1;
+    for (int i = index + 1; i < size; ++i) {
+        if (arr[index] == arr[i]) {
+            count--;
+            break;
+        }
+    }
+    return count + countDistinct(arr, size, index + 1);
+}
+
+bool onlyOddNumbers(int arr[], int size, int index) {
+    if (index == size) {
+        return true;
+    }
+    if (arr[index] % 2 == 0) {
+        return false;
+    }
+    return onlyOddNumbers(arr, size, index + 1);
+}
+
+int maxArrayValue(int arr[], int size, int index , int maxVal) {
+    if (index == size) {
+        return maxVal;
+    }
+    maxVal = std::max(maxVal, arr[index]);
+    return maxArrayValue(arr, size, index + 1, maxVal);
+}
