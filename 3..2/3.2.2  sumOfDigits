@@ -1,0 +1,20 @@
+#include <iostream>
+
+using namespace std;
+
+int sumOfDigits(int x);
+
+int main() {
+    int num = 12345; // Example
+    cout << "Sum of digits of " << num << " is: " << sumOfDigits(num) << endl;
+    return 0;
+}
+
+int sumOfDigits(int x) {
+    // Base case: return single digit
+    if (x < 10) {
+        return x; 
+    } else {
+        return x % 10 + sumOfDigits(x / 10);
+    }
+}
