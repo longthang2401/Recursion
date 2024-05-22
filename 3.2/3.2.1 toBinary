@@ -1,0 +1,20 @@
+#include <iostream>
+
+using namespace std;
+
+void toBinary(int x);
+
+int main() {
+    int num = 13; // Example
+    cout << "Binary representation of " << num << " is: ";
+    toBinary(num);
+    cout << endl;
+    return 0;
+}
+
+void toBinary(int x) {
+    if (x > 1) {
+        toBinary(x / 2);
+    }
+    cout << x % 2;
+}
