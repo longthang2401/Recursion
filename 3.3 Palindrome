@@ -1,0 +1,29 @@
+#include <iostream>
+#include <string.h>
+
+using namespace std;
+
+bool isPalindrome(int l, int r, char* s) ;
+
+int main() {
+    char str1[] = "123321"; // Palindrome
+    char str2[] = "apqfwfa"; // Not palindrome
+    char str3[] = "quanggnauq"; // Palindrome
+   
+
+    cout << "\"" << str1 << "\" is " << (isPalindrome(0, strlen(str1) - 1, str1) ? "a palindrome." : "not a palindrome.") << endl;
+    cout << "\"" << str2 << "\" is " << (isPalindrome(0, strlen(str2) - 1, str2) ? "a palindrome." : "not a palindrome.") << endl;
+    cout << "\"" << str3 << "\" is " << (isPalindrome(0, strlen(str3) - 1, str3) ? "a palindrome." : "not a palindrome.") << endl;
+
+    return 0;
+}
+
+
+bool isPalindrome(int l, int r, char* s) {
+    // Base case: empty string or single character is palindrome
+    if (l >= r) {
+        return true;
+    } else {
+        return (s[l] == s[r]) && isPalindrome(l + 1, r - 1, s); 
+    }
+}
